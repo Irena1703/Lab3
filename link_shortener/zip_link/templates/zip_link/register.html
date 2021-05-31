@@ -1,0 +1,64 @@
+{% extends "zip_link/base.html" %}
+
+{% block title %}Register{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+.asteriskField {
+    display: none;
+}
+</style>
+
+<div class="container" >
+<form method="post">
+    {% csrf_token %}
+    <h3 class ="mx-auto text-center">Register</h3>
+    <div class="row mx-auto">
+        <div class="row">
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-6">
+                {{ form.username|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-6">
+                {{ form.email|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-6">
+                {{ form.birth_date|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-6">
+                {{ form.gender|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-6">
+                {{ form.password1|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-6">
+                {{ form.password2|as_crispy_field }}
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%!important; margin:0.5rem">Register</button>
+    
+</form>
+</div>
+{% endblock %}

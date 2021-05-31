@@ -1,0 +1,28 @@
+{% extends "zip_link/base.html" %}
+
+{% block title %}Home{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    .asteriskField {
+        display: none;
+    }
+</style>
+<div class="container" style="padding-top: 1.5rem;">
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy}}
+        <button type="submit" class="btn btn-primary btn-lg" style="margin-top:1em;">Create zip_link</button>
+        {% if new_link %}
+        <script>
+            window.history.pushState(null, "");
+        </script>
+        <div class="alert alert-success" role="alert" style="margin-top: .5rem;">
+            Link was created successfully:
+             <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'redirect' link=new_link %}" 
+             class="alert-link">{{ request.scheme }}://{{ request.get_host }}{% url 'redirect' link=new_link %}</a>.
+        </div>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

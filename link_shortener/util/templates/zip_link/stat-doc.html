@@ -1,0 +1,20 @@
+{% extends "zip_link/base.html" %}
+{% load static %}
+{% block title %}Statistics{% endblock %}
+
+{% block content %}
+
+<div class="container" style="margin-top:0.5rem;">
+    {% if restart is True or restart is None %} 
+    <button id="btn-g" type="button" class="btn btn-primary" style="margin: 1em;">Create statistics</button>
+    {% endif %}
+    {% if status is not None %}
+    <p class="h6">Current status of the process: {{ status|lower }}</p>
+    {% endif %}
+    {% if content is not None %}
+    {{ content|safe }}
+    {% endif %}
+
+</div>
+<script src="{% static 'zip_link/stat.js' %}"></script>
+{% endblock %}

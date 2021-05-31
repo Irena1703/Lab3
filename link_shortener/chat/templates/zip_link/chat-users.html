@@ -1,0 +1,59 @@
+{% extends "shortlink/base.html" %}
+
+{% block title %}Chat users{% endblock %}
+
+{% block content %}
+
+<div class="container" style="margin-top:0.5rem;">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Connection time</th>
+
+      </tr>
+    </thead>
+    <tbody>
+{% for o in object_list %}
+<tr>
+    <th scope="row">{{ page_obj.start_index|add:forloop.counter0 }}</th>
+    <td>{{ o.user.username }}</td>
+    <td>{{ o.connected }}</td>
+{% empty %}
+        <td>
+            No users connected.
+        </td>
+{% endfor %}
+    </tbody>
+    </table>
+    {% if page_obj.has_previous or page_obj.has_next %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item {% if not page_obj.has_previous %}disabled {% endif %}">
+            <a class="page-link" 
+            {% if page_obj.has_previous %}
+            href="?page={{ page_obj.previous_page_number }}"
+            {% endif %}
+             tabindex="-1">Previous</a>
+          </li>
+          {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:'-1' }}">{{ page_obj.number|add:"-1" }}</a></li>
+          {% endif %}
+          <li class="page-item active"><a class="page-link" href="#">{{ page_obj.number }}</a></li>
+          {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.number|add:'1' }}">{{ page_obj.number|add:"1" }}</a></li>
+          {% endif %}
+          <li class="page-item {% if not page_obj.has_next %}disabled {% endif %}">
+            <a class="page-link" 
+            {% if page_obj.has_next %}
+            href="?page={{ page_obj.next_page_number }}"
+            {% endif %}
+            >Next</a>
+          </li>
+        </ul>
+      </nav>
+      {% endif %}
+</div>
+
+{% endblock %}

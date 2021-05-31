@@ -1,0 +1,28 @@
+{% extends "zip_link/base.html" %}
+
+{% block title %}Login{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    .asteriskField {
+        display: none;
+    }
+</style>
+
+<div class="container" style="padding-top: 1.5rem;">
+<form method="post">
+    {% csrf_token %}
+    <h3 class ="mx-auto text-center">Login</h3>
+    <div class="row ustify-content-md-center"> 
+            {% if view.get_redirect_url %}
+        <p class ="text-center alert alert-info">You must log in to continue.</p>
+            {% endif %}
+        {{ form|crispy }}
+    <div class="col-8 mx-auto text-center">
+        <button type="submit" class="btn btn-primary btn-lg" style="margin-top:1em;">Login</button>
+        <p style="padding-top: 1rem;">Don't have an account yet? <a href="{% url 'register' %}">Register</a></p>
+    </div>
+    </div>
+</form>
+</div>
+{% endblock %}
